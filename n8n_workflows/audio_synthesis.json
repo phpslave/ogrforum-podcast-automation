@@ -1,0 +1,14 @@
+{
+    "nodes": [
+        {
+            "parameters": {
+                "functionCode": "const { exec } = require('child_process');\nexec('python3 scripts/synthesize_audio.py', (error, stdout, stderr) => {\n  if (error) {\n    throw new Error(`exec error: ${error}`);\n  }\n  return stdout;\n});"
+            },
+            "name": "Synthesize Audio",
+            "type": "n8n-nodes-base.function",
+            "typeVersion": 1,
+            "position": [250, 300]
+        }
+    ],
+    "connections": {}
+}
