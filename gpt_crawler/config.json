@@ -1,0 +1,18 @@
+{
+    "base_url": "https://ogrforum.com",
+    "patterns": [
+        "/topic/.*",
+        "/post/.*"
+    ],
+    "selectors": {
+        "topics": ".topic-title",
+        "posts": ".post-content",
+        "user_metadata": ".user-info",
+        "post_times": ".post-time",
+        "source_links": ".source-materials a"
+    },
+    "compliance": {
+        "robots_txt": true,
+        "terms_of_service": true
+    }
+}
