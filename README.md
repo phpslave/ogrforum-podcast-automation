@@ -59,8 +59,48 @@ This project automates the workflow of extracting data from [ogrforum.com](https
      - Integrate the YouTube Data API within n8n to automate the upload process.
      - Include metadata such as title, description, tags, and playlist assignment to organize the content effectively.
 
-## Additional Considerations
+## Running the Workflow
 
-- **Legal Compliance**: Ensure that crawling and repurposing content from ogrforum.com complies with their terms of service and copyright laws.
-- **Resource Management**: Running local models and processing media files can be resource-intensive; ensure your hardware meets the necessary requirements.
-- **Error Handling**: Implement robust error handling within n8n to manage potential issues during crawling, data processing, or uploading.
+To run the entire workflow, follow these steps:
+
+### Prerequisites
+
+1. **Install Required Software**:
+   - Ensure you have `n8n`, `Qdrant`, `FFmpeg`, and any other necessary tools installed on your system.
+   - Set up a local LLM (e.g., Llama) and Parler-TTS for transcript generation and audio synthesis.
+
+2. **Configuration**:
+   - Update the `gpt_crawler/config.json` file with the correct base URL and patterns for data extraction.
+   - Ensure compliance settings are correct to respect `robots.txt` and terms of service.
+
+3. **Environment Variables**:
+   - Set up any required API keys and environment variables for the YouTube Data API and other services.
+   - Example: `export YOUTUBE_API_KEY=your_api_key_here`
+
+### Workflow Execution Order
+
+1. **Data Extraction**:
+   - Run the `data_extraction.json` workflow in n8n to start the GPT-Crawler and extract data from the forum.
+
+2. **Data Storage**:
+   - Execute the `data_storage.json` workflow to store the extracted data in Qdrant.
+
+3. **Transcript Generation**:
+   - Run the `transcript_generation.json` workflow to generate conversational transcripts using the local LLM.
+
+4. **Audio Synthesis**:
+   - Execute the `audio_synthesis.json` workflow to convert transcripts into audio files with Parler-TTS.
+
+5. **Video Creation**:
+   - Run the `video_creation.json` workflow to combine audio with images and create video files using FFmpeg.
+
+6. **YouTube Upload**:
+   - Execute the `youtube_upload.json` workflow to upload the generated videos to YouTube.
+
+### Additional Information
+
+- **Error Handling**: Ensure that each step in the workflow has proper error handling to manage any issues that arise.
+- **Resource Management**: Monitor system resources during execution, as some processes can be resource-intensive.
+- **Legal Compliance**: Verify that all content usage complies with legal requirements and terms of service.
+
+By following these steps, you can automate the process of creating and uploading podcast episodes from forum data.
